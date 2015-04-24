@@ -50,8 +50,8 @@ public class CommentsServlet extends HttpServlet {
 		
 		IhanapmokoCommentsHelper commentsHelper = new IhanapmokoCommentsHelper();
 		
-//		Comments comments = commentsHelper.addNewComment(fullname, email_address, message);
-		Comments comments = new Comments();
+		Comments comments = commentsHelper.addNewComment(fullname, email_address, message);
+//		Comments comments = new Comments();
 		
 		comments.setId(1);
 		comments.setFullname("Bryan Serrano");

@@ -16,7 +16,8 @@ Ano hanap mo? <input type="text" name="searchParameter">
 
 </form>
 
-<a href="CommentsServlet">Commentd and Suggestions </a> 
+<a href="CommentsServlet">Commentd and Suggestions </a> <br/>
+<a href="AdvertisementServlet">Post Ad </a> 
 
 </body>
 </html>

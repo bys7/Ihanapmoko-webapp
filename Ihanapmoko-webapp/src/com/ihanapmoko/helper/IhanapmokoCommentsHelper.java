@@ -25,15 +25,15 @@ public class IhanapmokoCommentsHelper {
 			comments.setDate_sent(new Date());
 			comments.setRead_marker(ConstantsUtil.COMMENTS_MARK_UNREAD);
 			
-			String stringComments = serviceFactory.parseObject(comments);
+			String strComments = serviceFactory.parseObject(comments);
 			
 			NameValuePair[] params = new NameValuePair[2];
 	  		params[0] = new NameValuePair();
 	  		params[0].setName("serviceMethod");
 	  		params[0].setValue(ServiceMethodNames.CREATE_COMMENT);
 	  		params[1] = new NameValuePair();
-			params[1].setName("stringComments");
-			params[1].setValue(stringComments);
+			params[1].setName("strComments");
+			params[1].setValue(strComments);
 			
 			AuthBean authBean = new AuthBean(
 	  				Configurator.getConfig("AUTH_USERNAME"),
