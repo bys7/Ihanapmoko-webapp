@@ -39,4 +39,24 @@
     <servlet-name>AdvertisementServlet</servlet-name>
     <url-pattern>/AdvertisementServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdvertisementAttachmentServlet</display-name>
+    <servlet-name>AdvertisementAttachmentServlet</servlet-name>
+    <servlet-class>com.ihanapmoko.servlet.AdvertisementAttachmentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdvertisementAttachmentServlet</servlet-name>
+    <url-pattern>/AdvertisementAttachmentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdvertisementInformationServlet</display-name>
+    <servlet-name>AdvertisementInformationServlet</servlet-name>
+    <servlet-class>com.ihanapmoko.servlet.AdvertisementInformationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdvertisementInformationServlet</servlet-name>
+    <url-pattern>/AdvertisementInformationServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
