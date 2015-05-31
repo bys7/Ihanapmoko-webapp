@@ -8,10 +8,7 @@
 <html>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script> 
-<style type="text/css">
-	<%@ include file="/WEB-INF/css/margin.css" %>
-	<%@ include file="/WEB-INF/css/ihanap.css" %>
-</style>
+
 <script type='text/javascript'>	
 
 	$(document).ready(function(){ 
@@ -24,10 +21,12 @@
 	});
 
 </script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/margin.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ihanap.css">
 
-<link href="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" rel="stylesheet"/>
-<link href="${pageContext.request.contextPath}/js/bootstrap.min.js" rel="stylesheet"/>
-<link href="${pageContext.request.contextPath}/js/bootbox.min.js" rel="stylesheet"/>
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootbox.min.js"></script>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
