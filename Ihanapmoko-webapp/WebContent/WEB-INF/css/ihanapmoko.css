@@ -1,0 +1,9 @@
+.advertisementPicture{
+	width:250px;
+	height:200px;
+}
+
+.advertisementPicture img{
+	width:100%;
+	height:100%;	
+}

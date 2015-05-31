@@ -31,14 +31,20 @@ public class AdvertisementAttachmentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String imageName = request.getParameter("imageName");
+		
 		response.setContentType("image/jpeg");
 		OutputStream out = response.getOutputStream();
-		FileInputStream in = new FileInputStream("C:/images/temp/DSC_0068.jpg");
+		FileInputStream in = new FileInputStream("C:/images/temp/" + imageName);
 		int size = in.available();
 		byte[] content = new byte[size];
-				
+		
+		System.out.println("SIZE OF IMAGE:" + content);
+		
 		in.read(content);
 		out.write(content);
+		
+		
 		in.close();
 		out.close();
 		

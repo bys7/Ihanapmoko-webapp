@@ -1,0 +1,590 @@
+/* CSS Document */
+/*Fonts*/
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('fonts/opensans-bold-webfont.eot');
+    src: url('fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-bold-webfont.woff2') format('woff2'),
+         url('fonts/opensans-bold-webfont.woff') format('woff'),
+         url('fonts/opensans-bold-webfont.ttf') format('truetype'),
+         url('fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('fonts/opensans-light-webfont.eot');
+    src: url('fonts/opensans-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-light-webfont.woff2') format('woff2'),
+         url('fonts/opensans-light-webfont.woff') format('woff'),
+         url('fonts/opensans-light-webfont.ttf') format('truetype'),
+         url('fonts/opensans-light-webfont.svg#open_sanslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('fonts/opensans-regular-webfont.eot');
+    src: url('fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-regular-webfont.woff2') format('woff2'),
+         url('fonts/opensans-regular-webfont.woff') format('woff'),
+         url('fonts/opensans-regular-webfont.ttf') format('truetype'),
+         url('fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*Main CSS*/
+body, html{
+	 font-family: 'open_sansregular';
+	 margin:0;
+	 padding:0;
+	 position:static;
+	 height:100%;
+	 overflow:visible;
+}
+
+.logo{
+	background:url("../images/iHanapMoKo.png") no-repeat;
+	width:190px;
+	height:65px;
+	background-size:contain;
+	display:inline-block;
+}
+
+.ihanapMain{
+	width:100%;	
+	height:100%;
+	min-width:1100px;
+	position:relative;
+}
+.header{
+	height:70px;
+	padding:10px;
+	background:#2D95B2; /*Medium Blue*/
+	-webkit-box-shadow: #666 0px 2px 3px;
+	-moz-box-shadow: #666 0px 2px 3px;
+	box-shadow: #666 0px 2px 3px;
+	position:relative;
+	z-index:3;
+}
+.body{
+	min-height:757px;	
+	-webkit-box-shadow: #666 0px 2px 3px;
+	-moz-box-shadow: #666 0px 2px 3px;
+	box-shadow: #666 0px 2px 3px;
+	position:relative;
+	z-index:2;
+}
+.footer{
+	background:#519CB2; /*Light Blue*/
+	height:40px;
+	padding:10px;
+	position:relative;
+	z-index:1;	
+}
+.footer a{
+	display:inline-block;
+	margin:10px 20px;	
+	text-decoration:none;
+	color:#fff;
+}
+
+.cenText{
+	text-align:center;	
+}
+
+.borderRight{
+	border-right:dotted 2px #2D95B2;
+	height:100%;
+	min-height:100%;
+}
+
+/*Width*/
+.width960{
+	width:960px;
+	margin:0 auto;	
+	padding:0 20px;
+}
+.width50P{
+	width:49%;	
+}
+
+.width30P{
+	width:30%;	
+}
+.width65P{
+	width:65%;	
+}
+
+/*Floats and Clear*/
+.pullLeft{
+	float:left;	
+}
+.pullRight{
+	float:right;	
+}
+.clear{
+	clear:both;
+	display:block;	
+}
+
+/*IhanapMain input Text Box*/
+.ihanapMain input[type="text"], .ihanapMain input[type="password"], .ihanapMain input[type="date"], .ihanapMain input[type="datetime"], .ihanapMain input[type="datetime-local"], .ihanapMain input[type="month"], .ihanapMain input[type="week"], .ihanapMain input[type="email"], .ihanapMain input[type="number"], .ihanapMain input[type="search"], .ihanapMain input[type="tel"], .ihanapMain input[type="time"], .ihanapMain input[type="url"], .ihanapMain input[type="color"], .ihanapMain textarea{
+	border:1px solid #2D95B2; /*Medium Blue*/
+	height:24px;
+	font-size:14px;
+	padding:5px;
+	outline:0;
+}
+
+.loginBox input[type="text"]{
+	width:94%;	
+	margin:5px 0 10px 0;
+}
+
+select {
+	border:1px solid #2D95B2; /*Medium Blue*/
+	color:#2D95B2;
+	font-family: 'open_sansbold';
+	height:36px;
+	font-size:14px;
+	padding:5px;
+	outline:0;
+}
+
+/*Checkbox*/
+label.customCheck {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+    font-size: 13px;
+}
+input[type=checkbox] {
+    display: none;
+}
+.checkbox label.customCheck:before {
+    border-radius: 3px;
+}
+input[type=checkbox]:checked + label.customCheck:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    color: #f3f3f3;
+    text-align: center;
+    line-height: 15px;
+}
+
+/*Text*/
+.textHead{
+	font-size:24px;
+	font-family: 'open_sansbold';
+	color:#003341;	/*Dark Blue*/
+}
+
+.ihanapMain label{
+	display:block;
+	color:#2D95B2; /*Medium Blue*/
+	font-size:16px;	
+}
+
+.loginBox label{
+	margin:5px 0 0;	
+}
+
+.textWhite{
+	color:#fff;	
+}
+
+/*Button*/
+
+button.buttonOrange{
+	background:#D0A234;
+	outline:0;
+	border:0;
+	color:#fff;
+	padding:5px 20px;
+	font-size:16px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor:pointer;
+	transition: background-color 300ms ease-out;
+}
+button.buttonOrange:hover{
+	background:#A27100;
+}
+
+button.buttonBlue{
+	background:#2D95B2;
+	outline:0;
+	border:0;
+	color:#fff;
+	padding:5px 20px;
+	font-size:16px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor:pointer;
+	transition: background-color 300ms ease-out;
+}
+button.buttonBlue:hover{
+	background:#003341;
+}
+
+button.buttonRed{
+	background:#D04934;
+	outline:0;
+	border:0;
+	color:#fff;
+	padding:5px 20px;
+	font-size:16px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor:pointer;
+	transition: background-color 300ms ease-out;
+}
+button.buttonRed:hover{
+	background:#A21600;
+}
+/*Link*/
+a.linkName{
+	color:#fff;
+	font-family: 'open_sanslight';
+	font-style:italic;
+}
+
+/*Banner*/
+.leaderboard{
+	width:728px;
+	height:90px;
+	margin:0 auto;	
+}
+
+.leaderboard iframe img{
+	width:100%;	
+}
+
+/*Thumbnail*/
+.gallery ul{
+	padding:0;
+	margin:20px 0;	
+}
+.gallery ul li{
+	list-style:none;
+	display:inline-block;
+	margin:10px;
+	width:22%;	
+	text-align:center;
+}
+.gallery ul li .imgHolder{
+	width:100%;	
+}
+.gallery ul li .imgHolder img{
+	width:100%;	
+}
+.imageBox{
+	border:1px solid #2D95B2;	
+	padding:10px;
+}
+#big {
+	width:100%;	
+}
+#thumbnailsProduct{
+	width:100%;	
+	text-align:center;
+
+}
+#thumbnailsProduct a{
+	width:25%;
+	display:inline-block;
+}
+#thumbnailsProduct a img{
+	width:100%;
+}
+.information{
+	border:1px solid #2D95B2;	
+	padding:10px 20px;
+	min-height: 372px;
+	width:60%;	
+	position:relative;
+}
+.information .delete{	
+  position: absolute;
+  bottom: 20px;
+  right: 20px;	
+}
+
+.bidBox ul{
+	list-style:none;
+	margin:0;
+	padding:0;
+	max-height:180px;
+	overflow:hidden;
+}
+.bidBox ul li{
+	border:1px solid #2D95B2;
+	padding:10px 20px;	
+	margin:10px 0;
+}
+.bidBox ul li p{
+	margin:0;
+}
+.bidBox ul li p.bidname{
+	width:25%;	
+}
+.bidBox ul li p.description{
+	width:50%;	
+}
+.bidNowBox{
+	border:1px solid #D0A234;
+}
+.bidNowBox label{
+	color:#D0A234;	
+}
+.textAreaBox{
+	width:85.5%;	
+}
+.ihanapMain .bidNowBox textarea{
+	border:1px solid #D0A234;	
+	width:100%;
+	height:200px;
+	 resize: none;
+	 background:#F2F2F2;
+}
+
+.ihanapMain .bidNowBox textarea:focus{
+	background:#fff;
+}
+
+.uploadImg{
+	width:100px;
+	height:100px;	
+}
+.uploadImg img{
+	width:100%;
+}
+
+
+
+
+.close {
+  float: right;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1;
+  color: #D04934;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+  outline:0;
+}
+.close:hover,
+.close:focus {
+  color: #D04934;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+button.close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+.modal-open {
+  overflow: hidden;
+}
+.modal {
+  position: fixed;
+  top: 150px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+  width:700px;
+  margin:0 auto;
+}
+.modal.fade .modal-dialog {
+  -webkit-transition: -webkit-transform .3s ease-out;
+       -o-transition:      -o-transform .3s ease-out;
+          transition:         transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+      -ms-transform: translate(0, -25%);
+       -o-transform: translate(0, -25%);
+          transform: translate(0, -25%);
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+       -o-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: 0;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
+}
+.modal-backdrop.fade {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.modal-backdrop.in {
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+.modal-header {
+  min-height: 16.42857143px;
+  padding: 15px;
+}
+.modal-header .close {
+  margin-top: -2px;
+}
+.modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+.modal-body {
+  position: relative;
+  padding: 15px;
+}
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+.modalForm label{
+	display:block;
+	margin:10px 0;
+}
+.modalForm input[type="text"]{
+	width:90%;
+}
+.modalForm textarea{
+	width:90%;
+		
+	height:100px;
+	 resize: none;
+}
+
+.skyscraper {
+	width:162px;
+	height:602px;	
+}
+.commentBox label{
+	margin:10px 0 10px;	
+}
+
+.commentBox input[type="text"], .commentBox textarea{
+	width:100%	
+}
+ .commentBox textarea{
+	height:150px;
+	resize:none; 
+ }
+ 
+ .pendingList {
+	width:100%;
+	text-align:center; 
+ }
+ 
+
+ 
+ .pendingList tr td {
+	max-width:200px;
+	overflow:hidden;
+	word-wrap:break-word;
+	 text-overflow: ellipsis;
+	 white-space:nowrap;
+	 padding:10px 0;
+
+ }
+ .messageBox ul{
+	padding:0; 
+ }
+ .messageBox ul li{
+	height:290px;
+	overflow:hidden; 
+ }
+ 
+ .messageBox h4 a{
+	 color:#2D95B2;
+ }
+ 
+ /*Check Box*/
+.customCheckbox input{
+	display:none;
+
+}
+.customCheckbox span.checkbg {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin:0 10px 0 0;
+	cursor: pointer;
+	position: relative;
+
+	border:1px solid #2D95B2;
+
+}
+.customCheckbox input[type=checkbox]:checked  + span.checkbg {
+	background:url('../images/checkbox.png');
+}
+.customCheckbox {
+	float:left;	
+}
+.customCheckbox span {
+	float:left;	
+}

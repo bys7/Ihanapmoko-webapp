@@ -59,4 +59,14 @@
     <servlet-name>AdvertisementInformationServlet</servlet-name>
     <url-pattern>/AdvertisementInformationServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdsConfirmationServlet</display-name>
+    <servlet-name>AdsConfirmationServlet</servlet-name>
+    <servlet-class>com.ihanapmoko.servlet.AdsConfirmationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdsConfirmationServlet</servlet-name>
+    <url-pattern>/AdsConfirmationServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
