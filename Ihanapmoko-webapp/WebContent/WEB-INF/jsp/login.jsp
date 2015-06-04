@@ -46,10 +46,10 @@
                          <span class="clear"></span>
                          
                         <label>Password</label>
-                        <input name="regPassword" type="text"/>
+                        <input name="regPassword"  type="password"/>
                         
                         <label>Confirm Password</label>
-                        <input name="regConfirmPassword" type="text" onChange="checkPasswordMatch();"/>
+                        <input name="regConfirmPassword" type="password" onChange="checkPasswordMatch();"/>
                         
                         <span class="clear"></span>
                         <button id="registration-form-btn" class="buttonOrange pullRight mtop20 mright20">Register</button>
@@ -57,23 +57,24 @@
                         <span class="clear"></span>
                 </div>
                  </form>
+                 <form id="login-form" action="LoginServlet" method="post">
             	<div class="loginBox width50P pullRight padbot20">
                 	<h1 class="textHead mbot10">Login</h1>
                     
                     <label>
                     	Username
                     </label>
-                    <input type="text"/>
+                    <input name="username" type="text"/>
                     <label>
                     	Password
                     </label>
-                    <input type="text"/>
+                    <input name="password" type="password"/>
                     <span class="clear"></span>
-                    <button class="buttonOrange pullRight mtop20 mright20">Login</button>
+                    <button id="login-form-btn" class="buttonOrange pullRight mtop20 mright20">Login</button>
                 
                 	<span class="clear"></span>
                 </div>
-            	
+            	</form>
                 <span class="clear"></span>
             
             </div>

@@ -116,5 +116,23 @@
     <servlet-name>request_success</servlet-name>
     <url-pattern>/request_success</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.ihanapmoko.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>login_error</servlet-name>
+    <jsp-file>/WEB-INF/jsp/login_error.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login_error</servlet-name>
+    <url-pattern>/login_error</url-pattern>
+  </servlet-mapping>
   
 </web-app>
