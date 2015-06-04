@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ihanapmoko.bean.User;
+import com.ihanapmoko.helper.ConstantsUtil;
 import com.ihanapmoko.helper.IhanapmokoUserHelper;
 
 
@@ -28,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 		User user = helper.getUserViaEmailAndPassword(username, password);
 		if(user==null){
 			response.sendRedirect("/Ihanapmoko-webapp/login_error");
-		}else{
+		}else if(user!=null && user.getActivated().equals(ConstantsUtil.USER_ACTIVATED)){
 			response.sendRedirect("/Ihanapmoko-webapp/AdvertisementServlet");
 			
 		}
