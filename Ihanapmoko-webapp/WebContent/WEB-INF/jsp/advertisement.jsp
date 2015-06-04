@@ -7,9 +7,11 @@
 
 <html>
 
+
+
 <style type="text/css">
-<%@ include file="/WEB-INF/css/ihanapmoko.css" %>
-</style>
+<%@ include file="/Ihanapmoko-webapp/css/ihanapmoko.css" %>
+<!-- </style> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script> 
 <link href="${pageContext.request.contextPath}/js/jquery-ui.min.js" rel="stylesheet"/>
 <script type='text/javascript'>	
@@ -53,7 +55,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>IhanapMoko</title>
-
 </head>
 <body onload="loadWindow('${lstFileNameSize}')">
 
