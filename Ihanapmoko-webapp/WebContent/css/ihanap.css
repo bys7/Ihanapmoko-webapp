@@ -112,11 +112,18 @@ body, html{
 	width:49%;	
 }
 
+.width47P{
+	width:47%;	
+}
+
 .width30P{
 	width:30%;	
 }
 .width65P{
 	width:65%;	
+}
+.width77P{
+	width:77%;	
 }
 
 /*Floats and Clear*/
@@ -252,6 +259,24 @@ button.buttonRed{
 button.buttonRed:hover{
 	background:#A21600;
 }
+
+input.buttonOrange{
+	background:#D0A234;
+	outline:0;
+	border:0;
+	color:#fff;
+	padding:5px 20px;
+	font-size:16px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	cursor:pointer;
+	transition: background-color 300ms ease-out;
+}
+input.buttonOrange:hover{
+	background:#A27100;
+}
+
 /*Link*/
 a.linkName{
 	color:#fff;
@@ -288,6 +313,26 @@ a.linkName{
 .gallery ul li .imgHolder img{
 	width:100%;	
 }
+
+/*Temp Image*/
+.uploadimage ul{
+	padding:0;
+	margin:20px 0;	
+}
+.uploadimage ul li{
+	list-style:none;
+	display:inline-block;
+	margin:10px;
+	width:42%;	
+	text-align:center;
+}
+.uploadimage ul li .imgHolder{
+	width:100%;	
+}
+.uploadimage ul li .imgHolder img{
+	width:100%;	
+}
+
 .imageBox{
 	border:1px solid #2D95B2;	
 	padding:10px;
@@ -587,4 +632,20 @@ button.close {
 }
 .customCheckbox span {
 	float:left;	
+}
+.advertisementPicture{
+	width:180px;
+	height:120px;
+}
+
+.errorMessage{
+	hieght: padding-left:10px; 
+	color:#FF0F2C;
+}
+
+/*********Validation*********/
+
+.required:after{
+	content: " *";
+	color:#FF0F2C;	
 }

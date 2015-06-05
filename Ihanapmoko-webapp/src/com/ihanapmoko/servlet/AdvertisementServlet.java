@@ -98,7 +98,7 @@ public class AdvertisementServlet extends HttpServlet {
 		String confirmPassword		= null;
 		String description			= null;
 		String item_condition		= null;
-		String strPictures				= null;
+		String strPictures			= null;
 		String displayPhoto			= null;
 		
 		String cateogoryName		= null;
@@ -169,9 +169,6 @@ public class AdvertisementServlet extends HttpServlet {
 						if(fieldName.equals("item_condition")){
 							item_condition = item.getString();
 						}
-						if(fieldName.equals("password")){
-							password = item.getString();
-						}
 						if(fieldName.equals("delimiterFileName")){
 							strPictures = item.getString();
 						}
@@ -179,18 +176,22 @@ public class AdvertisementServlet extends HttpServlet {
 							displayPhoto = item.getString();
 						}
 					}
-					if(item.getSize() < 8242880){
-						if(!item.isFormField()){
-							String name = new File(item.getName()).getName();
-							item.write(new File(imagesPathTemp + File.separator + email_address + "_" + dateFormat.format(currentDate) + "_" + name));
-							System.out.println("File name : " + name);
-							fileName =  email_address + "_" +  dateFormat.format(currentDate) +  "_" + name;
-							lstFileName.add(fileName);
+					if(item!=null){
+						if(item.getSize() < 8242880){
+							if(!item.isFormField()){
+								String name = new File(item.getName()).getName();
+								item.write(new File(imagesPathTemp + File.separator + email_address + "_" + dateFormat.format(currentDate) + "_" + name));
+								System.out.println("File name : " + name);
+								fileName =  email_address + "_" +  dateFormat.format(currentDate) +  "_" + name;
+								if(name!=null && !name.equals("")){
+									lstFileName.add(fileName);
+								}							
+							}
+						}else{
+							System.out.println( " File is too large ");
+							errorMessage = errorMessage + " File is too large ";
 						}
-					}else{
-						System.out.println( " File is too large ");
-						errorMessage = errorMessage + " File is too large ";
-					}
+					}					
 					
 				}
 			}catch(Exception e){
@@ -202,14 +203,18 @@ public class AdvertisementServlet extends HttpServlet {
 			
 		}
 		
-		if(advertisement!=null){
 			for(FilterLookup filter : filterLookupList){
-				if(advertisement.toLowerCase().contains(filter.getWords()) || description.toLowerCase().contains(filter.getWords())){
-					System.out.println("ILLIGAL WORDS");
-					errorMessage = errorMessage + filter.getWords() + " ";
+				if(advertisement!=null && !advertisement.equals("")){
+					if(advertisement.toLowerCase().contains(filter.getWords())){
+						errorMessage = errorMessage + filter.getWords() + " ";
+					}
+				}				
+				if(description!=null && !description.equals("")){
+					if(description.toLowerCase().contains(filter.getWords())){
+						errorMessage = errorMessage + filter.getWords() + " ";
+					}
 				}
 			}
-		}
 		
 		if(number_is_private==null){
 			number_is_private = ConstantsUtil.NUMBER_IS_PUBLIC;
@@ -247,38 +252,42 @@ public class AdvertisementServlet extends HttpServlet {
 		advertisementIterate.add(advertisementBean);
 		
 		if(password!=null && !password.equals("")){
-			try{
-				
-				splitPictures = strPictures.split("\\|");
-				
-				for(String transferFile : splitPictures){
+			try{				
+				if(strPictures!=null && !strPictures.equals("")){
+					splitPictures = strPictures.split("\\|");
 					
-					File tempFile = new File(imagesPathTemp + "\\" + transferFile);
-					System.out.println("FILE FROM:" + imagesPathTemp + transferFile);
-					if(tempFile.renameTo(new File(imagesPathPermanent + "\\" + tempFile.getName()))){
-						System.out.println("FILES HAS BEEN TRANSFERED");
-						picturesBean = new Pictures();
-						picturesBean.setPicture_destination(tempFile.getName());
-						picturesHelper.createPictures(picturesBean);
-					}else{
-						System.out.println("FAILED TO TRANSFER FILES");
+					for(String transferFile : splitPictures){
+						
+						File tempFile = new File(imagesPathTemp + "\\" + transferFile);
+						System.out.println("FILE FROM:" + imagesPathTemp + transferFile);
+						if(tempFile.renameTo(new File(imagesPathPermanent + "\\" + tempFile.getName()))){
+							System.out.println("FILES HAS BEEN TRANSFERED");
+							picturesBean = new Pictures();
+							picturesBean.setPicture_destination(tempFile.getName());
+							picturesHelper.createPictures(picturesBean);
+						}else{
+							System.out.println("FAILED TO TRANSFER FILES");
+						}
 					}
+					picturesBean = picturesHelper.fetchPictureByName(displayPhoto);
+					advertisementBean.setPicture_id(picturesBean.getId());
+				}else{
+					advertisementBean.setPicture_id(1);
 				}
-				
-				picturesBean = picturesHelper.fetchPictureByName(displayPhoto);
-				advertisementBean.setPicture_id(picturesBean.getId());
 				advertisementHelper.createAdvertisement(advertisementBean);
 				
-				ad_picture_id = advertisementHelper.fetchAdvertismentByPictureId(String.valueOf(picturesBean.getId()));
-				
-				for(String pictureServices : splitPictures){
-					picturesServicesBean 	= new PicturesServices();
-					picturesBean		 	= new Pictures();
+				if(picturesBean!=null && !picturesBean.equals("")){
+					ad_picture_id = advertisementHelper.fetchAdvertismentByPictureId(String.valueOf(picturesBean.getId()));
 					
-					picturesBean = picturesHelper.fetchPictureByName(pictureServices);
-					picturesServicesBean.setAdvertisement_id(ad_picture_id.getId());
-					picturesServicesBean.setPictures_id(picturesBean.getId());
-					picturesServicesHelper.createPictures(picturesServicesBean);
+					for(String pictureServices : splitPictures){
+						picturesServicesBean 	= new PicturesServices();
+						picturesBean		 	= new Pictures();
+						
+						picturesBean = picturesHelper.fetchPictureByName(pictureServices);
+						picturesServicesBean.setAdvertisement_id(ad_picture_id.getId());
+						picturesServicesBean.setPictures_id(picturesBean.getId());
+						picturesServicesHelper.createPictures(picturesServicesBean);
+					}					
 				}
 				
 
@@ -286,14 +295,15 @@ public class AdvertisementServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			
 		}else{
 			category 	= categoryHelper.fetchCategoryById(category_Id);
 			cateogoryName = category.getCategory();
 			
 			location	= locationHelper.fetchLocationById(location_id);
 			loationName = location.getLocation();
-		}
-		
+			
+		}		
 		
 		request.setAttribute("errorMessage", errorMessage);
 		request.setAttribute("advertisementIterate", advertisementIterate);
@@ -301,9 +311,9 @@ public class AdvertisementServlet extends HttpServlet {
 		request.setAttribute("lstFileNameSize", lstFileName.size());
 		request.setAttribute("cateogoryName", cateogoryName);
 		request.setAttribute("loationName", loationName);
+				
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/advertisement.jsp").forward(request, response);
-		
 //		request.getRequestDispatcher("/AdsConfirmationServlet").forward(request, response);
 //		doGet(request,response);
 		

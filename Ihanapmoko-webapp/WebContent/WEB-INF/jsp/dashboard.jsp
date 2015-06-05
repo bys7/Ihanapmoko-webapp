@@ -4,20 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ihanap Moko</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<form method="post" action="SearchServlet">
-
-Ano hanap mo? <input type="text" name="searchParameter">
-
-<input type="submit" value="Search">
-
-</form>
-
-<a href="CommentsServlet">Commentd and Suggestions </a> <br/>
-<a href="AdvertisementServlet">Post Ad </a> 
 
 </body>
 </html>

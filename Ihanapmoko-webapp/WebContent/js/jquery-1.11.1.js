@@ -5025,7 +5025,7 @@ jQuery.each({
 	};
 });
 
-// IE submit delegation
+//IE submit delegation
 if ( !support.submitBubbles ) {
 
 	jQuery.event.special.submit = {

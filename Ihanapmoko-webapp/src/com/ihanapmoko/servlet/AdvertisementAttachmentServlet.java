@@ -32,10 +32,12 @@ public class AdvertisementAttachmentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String imageName = request.getParameter("imageName");
+		String imagePath = Configurator.getConfig("IMAGES_FILE_PATH_TEMP");
 		
 		response.setContentType("image/jpeg");
 		OutputStream out = response.getOutputStream();
-		FileInputStream in = new FileInputStream("C:/images/temp/" + imageName);
+//		FileInputStream in = new FileInputStream("C:/images/temp/" + imageName);
+		FileInputStream in = new FileInputStream(imagePath + "/" + imageName);
 		int size = in.available();
 		byte[] content = new byte[size];
 		

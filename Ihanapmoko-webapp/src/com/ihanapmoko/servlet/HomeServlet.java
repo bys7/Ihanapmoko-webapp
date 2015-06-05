@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AdsConfirmationServlet
  */
-public class AdsConfirmationServlet extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdsConfirmationServlet() {
+    public HomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -24,11 +24,9 @@ public class AdsConfirmationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String strAdvertisementBean		= request.getParameter("advertisementBean");
 		
-		System.out.println("advertisementBean:" + strAdvertisementBean);
 		
-		request.getRequestDispatcher("/WEB-INF/jsp/advertisement.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		
 	}
 

@@ -2,6 +2,7 @@ package com.ihanapmoko.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,7 +41,8 @@ public class SearchServlet extends HttpServlet {
 		
 		System.out.println("SERVLET CALL: IHANAP MOKO");
 		
-		String searchParameter = request.getParameter("searchParameter");
+		String searchParameter 	= request.getParameter("searchParameter");
+		Date currentDate 		= new Date();
 		
 		System.out.println("IHANAP MOKO SEARCH PARAMETER:" + searchParameter);
 		
@@ -57,7 +59,12 @@ public class SearchServlet extends HttpServlet {
 			System.out.println("SEARCH RESULT PICTURE:" + objSearch.getPicture_destination());
 		}
 		
+		request.setAttribute("lstFileNameSize", lstSearchResult.size());
+		request.setAttribute("searchParameter", searchParameter);
+		request.setAttribute("currentDate", currentDate);
+		request.setAttribute("lstSearchResult", lstSearchResult);
 		
+		request.getRequestDispatcher("/WEB-INF/jsp/searchresult.jsp").forward(request, response);
 		
 	}
 
