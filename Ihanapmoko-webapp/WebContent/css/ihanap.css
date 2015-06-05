@@ -588,3 +588,6 @@ button.close {
 .customCheckbox span {
 	float:left;	
 }
+.error{
+	border:1px solid red !important;
+}
