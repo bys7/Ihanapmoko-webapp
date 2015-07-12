@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ihanapmoko.bean.Comments;
+import com.ihanapmoko.bean.User;
 import com.ihanapmoko.helper.IhanapmokoCommentsHelper;
+import com.ihanapmoko.helper.IhanapmokoUserHelper;
 
 /**
  * Servlet implementation class CommentsServlet
@@ -29,11 +31,12 @@ public class CommentsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-//		RequestDispatcher view = request.getRequestDispatcher("/jsp/sendcomments.jsp");
-//		view.forward(request, response);
+		IhanapmokoUserHelper userHelper			= new IhanapmokoUserHelper();
+				
+		userHelper.checkUser(request,response);
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/sendcomments.jsp").forward(request, response);
+		
 		
 	}
 
@@ -48,19 +51,24 @@ public class CommentsServlet extends HttpServlet {
 		String email_address = request.getParameter("email_address");
 		String message		= request.getParameter("message");
 		
+		Comments comments = null;
+		
 		IhanapmokoCommentsHelper commentsHelper = new IhanapmokoCommentsHelper();
+		IhanapmokoUserHelper userHelper			= new IhanapmokoUserHelper();
 		
-		Comments comments = commentsHelper.addNewComment(fullname, email_address, message);
-//		Comments comments = new Comments();
+		try{
+			comments = new Comments();
+			comments = commentsHelper.addNewComment(fullname, email_address, message);
+		}catch(Exception e){
+			e.printStackTrace();
+		}		
 		
-		comments.setId(1);
-		comments.setFullname("Bryan Serrano");
-		comments.setEmail_address("bys_7@yahoo.com");
-		comments.setMessage("Ang Bagal talaga");
-		comments.setRead_marker(0);
+		userHelper.checkUser(request,response);
 		
-		request.setAttribute("comments", comments);
+		request.setAttribute("comments", comments);	
+		
 		request.getRequestDispatcher("/WEB-INF/jsp/sendcomments.jsp").forward(request, response);
 	}
-
+	
+	
 }

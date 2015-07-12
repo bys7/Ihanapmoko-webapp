@@ -35,23 +35,7 @@
 <form id="sendComment" method="post" action="CommentsServlet">
 	<div class="ihanapMain">
 	
-		<div class="header">
-        	<div class="width960">
-                <a href="HomeServlet"><span class="logo pullLeft"></span></a>
-                
-                <!---Login--->
-                    <button class="buttonOrange pullRight mtop20">Login/Signup</button>
-                    
-                    <!--<div class="pullRight mtop20">
-                    	<span class="pullLeft mright20 textWhite">Login as <a href="#" class="linkName">Name</a></span>
-                    	<button class="buttonRed pullRight">Logout</button>
-                        <span class="clear"></span>
-                    </div>
-                
-                <!----------->
-                <span class="clear"></span>
-            </div>
-        </div>	
+		<%@ include file="/WEB-INF/jsp/header.jsp" %>	
         
         <div class="body padtop40 padbot20">
         	<div class="width960">
@@ -80,16 +64,7 @@
         </div>
         
         <!-----Footer----->
-        <div class="footer">
-        	<div class="width960 cenText">
-
-                	<a href="#">About us</a>
-                    <a href="CommentsServlet">Contact Us</a>
-                    <a href="#">Disclaimer</a>
-                
-            </div>
-        
-        </div>
+        <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 	</div>
 
 </form>

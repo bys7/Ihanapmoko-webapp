@@ -23,14 +23,17 @@ import com.ihanapmoko.bean.FilterLookup;
 import com.ihanapmoko.bean.Location;
 import com.ihanapmoko.bean.Pictures;
 import com.ihanapmoko.bean.PicturesServices;
+import com.ihanapmoko.bean.User;
 import com.ihanapmoko.helper.Configurator;
 import com.ihanapmoko.helper.ConstantsUtil;
 import com.ihanapmoko.helper.IhanapmokoAdvertisementHelper;
 import com.ihanapmoko.helper.IhanapmokoCategoryHelper;
+import com.ihanapmoko.helper.IhanapmokoEmailHelper;
 import com.ihanapmoko.helper.IhanapmokoFilterLookupHelper;
 import com.ihanapmoko.helper.IhanapmokoLocationHelper;
 import com.ihanapmoko.helper.IhanapmokoPicturesHelper;
 import com.ihanapmoko.helper.IhanapmokoPicturesServicesHelper;
+import com.ihanapmoko.helper.IhanapmokoUserHelper;
 
 /**
  * Servlet implementation class AdvertisementServlet
@@ -58,19 +61,37 @@ public class AdvertisementServlet extends HttpServlet {
 		
 		IhanapmokoCategoryHelper categoryHelper = new IhanapmokoCategoryHelper();
 		IhanapmokoLocationHelper locationHelper = new IhanapmokoLocationHelper();
+		IhanapmokoUserHelper 	 userHelper		= new IhanapmokoUserHelper();
+				
+		List<Category> allCategory 				= new ArrayList<Category>();
+		List<Location> allLocation 				= new ArrayList<Location>();
+		Advertisement 	advertisementBean 		= new Advertisement();
 		
-		List<Category> allCategory = new ArrayList<Category>();
-		List<Location> allLocation = new ArrayList<Location>();
+		boolean firstPage						= true;
+		
+		
+		List<Advertisement> advertisementIterate 	= new ArrayList<Advertisement>();
+		List<String> 		conditionList			= new ArrayList<String>();
 		
 		allCategory = categoryHelper.fetchAllCategory();
 		allLocation = locationHelper.fetchAllLocation();
 		
+		conditionList.add("Brand New");
+		conditionList.add("Used");
+		
+		advertisementBean.setDate_created(new Date());		
+		
+		advertisementIterate.add(advertisementBean);
+		
+		userHelper.checkUser(request,response);
+		
 		request.setAttribute("allCategory", allCategory);
-		request.setAttribute("allLocation", allLocation);		
+		request.setAttribute("allLocation", allLocation);
+		request.setAttribute("advertisementIterate", advertisementIterate);
+		request.setAttribute("firstPage", firstPage);
+		request.setAttribute("conditionList", conditionList);
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/advertisement.jsp").forward(request, response);
-		
-
 		
 	}
 
@@ -115,7 +136,9 @@ public class AdvertisementServlet extends HttpServlet {
 		IhanapmokoLocationHelper			locationHelper			= new IhanapmokoLocationHelper();
 		IhanapmokoPicturesHelper			picturesHelper			= new IhanapmokoPicturesHelper();
 		IhanapmokoPicturesServicesHelper 	picturesServicesHelper	= new IhanapmokoPicturesServicesHelper();
-		
+		IhanapmokoEmailHelper 				emailHelper 			= new IhanapmokoEmailHelper();
+		IhanapmokoUserHelper 				userHelper				= new IhanapmokoUserHelper();
+				
 		Advertisement 		advertisementBean 		= new Advertisement();
 		Advertisement 		ad_picture_id			= new Advertisement();
 		Category			category				= new Category();
@@ -123,11 +146,17 @@ public class AdvertisementServlet extends HttpServlet {
 		List<FilterLookup> 	filterLookupList		= new ArrayList<FilterLookup>();
 		List<Advertisement> advertisementIterate 	= new ArrayList<Advertisement>();
 		List<String> 		lstFileName				= new ArrayList<String>();
+		List<Category> 		allCategory 			= new ArrayList<Category>();
+		List<Location>		allLocation 			= new ArrayList<Location>();
+		List<String> 		conditionList			= new ArrayList<String>();
 		
 		Pictures			picturesBean			= null;
 		PicturesServices	picturesServicesBean	= null;
 		
 		filterLookupList = filterLookupHelper.fetchAllFilterLookup();
+		
+		conditionList.add("Brand New");
+		conditionList.add("Used");
 		
 		if(ServletFileUpload.isMultipartContent(request)){
 			try{
@@ -189,7 +218,7 @@ public class AdvertisementServlet extends HttpServlet {
 							}
 						}else{
 							System.out.println( " File is too large ");
-							errorMessage = errorMessage + " File is too large ";
+							errorMessage = errorMessage + " File is too large. ";
 						}
 					}					
 					
@@ -203,38 +232,30 @@ public class AdvertisementServlet extends HttpServlet {
 			
 		}
 		
-			for(FilterLookup filter : filterLookupList){
-				if(advertisement!=null && !advertisement.equals("")){
-					if(advertisement.toLowerCase().contains(filter.getWords())){
-						errorMessage = errorMessage + filter.getWords() + " ";
+		for(FilterLookup filter : filterLookupList){
+			if(advertisement!=null && !advertisement.equals("")){
+				if(advertisement.toLowerCase().contains(filter.getWords())){
+					if(errorMessage==null){
+						errorMessage = "";
 					}
-				}				
-				if(description!=null && !description.equals("")){
-					if(description.toLowerCase().contains(filter.getWords())){
-						errorMessage = errorMessage + filter.getWords() + " ";
+					errorMessage = errorMessage + filter.getWords() + ", ";
+				}
+			}				
+			if(description!=null && !description.equals("")){
+				if(description.toLowerCase().contains(filter.getWords())){
+					if(errorMessage==null){
+						errorMessage = "";
 					}
+					errorMessage = errorMessage + filter.getWords() + ", ";
 				}
 			}
+		}
 		
 		if(number_is_private==null){
 			number_is_private = ConstantsUtil.NUMBER_IS_PUBLIC;
 		}else{
 			number_is_private = ConstantsUtil.NUMBER_IS_PRIVATE;
 		}
-		
-		System.out.println("LOOKING FOR:" + advertisement);
-		System.out.println("CATEGORY ID:" + category_Id);
-		System.out.println("CONTACT NUMBER:" + contact_number);
-		System.out.println("IS PRIVATE:" + number_is_private);
-		System.out.println("EMAIL ADDRESS:" + email_address);
-		System.out.println("LOCATION ID:" + location_id);
-		System.out.println("BUDGET:" + budget);
-		System.out.println("PASSWORD:" + password);
-		System.out.println("CONFIRM PASSWORD:" + confirmPassword);
-		System.out.println("DESCRIPTION:" + description);
-		System.out.println("CONDITION:" + item_condition);
-		System.out.println("PICTURE:" + strPictures);
-		System.out.println("displayPhoto:" + displayPhoto);
 		
 		advertisementBean.setAdvertisement(advertisement);
 		advertisementBean.setCategory_id(Integer.parseInt(category_Id));
@@ -251,59 +272,83 @@ public class AdvertisementServlet extends HttpServlet {
 		
 		advertisementIterate.add(advertisementBean);
 		
-		if(password!=null && !password.equals("")){
-			try{				
-				if(strPictures!=null && !strPictures.equals("")){
-					splitPictures = strPictures.split("\\|");
-					
-					for(String transferFile : splitPictures){
+		if(errorMessage==null){			
+			
+			if(password!=null && !password.equals("")){
+				try{				
+					if(strPictures!=null && !strPictures.equals("")){
+						splitPictures = strPictures.split("\\|");
 						
-						File tempFile = new File(imagesPathTemp + "\\" + transferFile);
-						System.out.println("FILE FROM:" + imagesPathTemp + transferFile);
-						if(tempFile.renameTo(new File(imagesPathPermanent + "\\" + tempFile.getName()))){
-							System.out.println("FILES HAS BEEN TRANSFERED");
-							picturesBean = new Pictures();
-							picturesBean.setPicture_destination(tempFile.getName());
-							picturesHelper.createPictures(picturesBean);
-						}else{
-							System.out.println("FAILED TO TRANSFER FILES");
+						for(String transferFile : splitPictures){
+							
+							File tempFile = new File(imagesPathTemp + "/" + transferFile);
+							System.out.println("FILE FROM:" + imagesPathTemp + transferFile);
+							if(tempFile.renameTo(new File(imagesPathPermanent + "/" + tempFile.getName()))){
+								System.out.println("FILES HAS BEEN TRANSFERED");
+								picturesBean = new Pictures();
+								picturesBean.setPicture_destination(tempFile.getName());
+								picturesHelper.createPictures(picturesBean);
+							}else{
+								System.out.println("FAILED TO TRANSFER FILES");
+							}
 						}
-					}
-					picturesBean = picturesHelper.fetchPictureByName(displayPhoto);
-					advertisementBean.setPicture_id(picturesBean.getId());
-				}else{
-					advertisementBean.setPicture_id(1);
-				}
-				advertisementHelper.createAdvertisement(advertisementBean);
-				
-				if(picturesBean!=null && !picturesBean.equals("")){
-					ad_picture_id = advertisementHelper.fetchAdvertismentByPictureId(String.valueOf(picturesBean.getId()));
-					
-					for(String pictureServices : splitPictures){
-						picturesServicesBean 	= new PicturesServices();
-						picturesBean		 	= new Pictures();
+						if(displayPhoto!=null){
+							picturesBean = picturesHelper.fetchPictureByName(displayPhoto);
+							
+						}else{
+							picturesBean = picturesHelper.fetchPictureByName(splitPictures[0]);
+						}
+						advertisementBean.setPicture_id(picturesBean.getId());
 						
-						picturesBean = picturesHelper.fetchPictureByName(pictureServices);
-						picturesServicesBean.setAdvertisement_id(ad_picture_id.getId());
-						picturesServicesBean.setPictures_id(picturesBean.getId());
-						picturesServicesHelper.createPictures(picturesServicesBean);
-					}					
+					}else{
+						advertisementBean.setPicture_id(1);
+					}
+					advertisementHelper.createAdvertisement(advertisementBean);							
+					
+					if(picturesBean!=null && !picturesBean.equals("")){
+						ad_picture_id = advertisementHelper.fetchAdvertismentByPictureId(String.valueOf(picturesBean.getId()));
+						
+						for(String pictureServices : splitPictures){
+							picturesServicesBean 	= new PicturesServices();
+							picturesBean		 	= new Pictures();
+							
+							picturesBean = picturesHelper.fetchPictureByName(pictureServices);
+							picturesServicesBean.setAdvertisement_id(ad_picture_id.getId());
+							picturesServicesBean.setPictures_id(picturesBean.getId());
+							picturesServicesHelper.createPictures(picturesServicesBean);
+						}					
+					}
+					
+					advertisementBean = advertisementHelper.fetchAdvertisementByNameEmailContactNumberPassword(
+							advertisementBean.getAdvertisement(), advertisementBean.getEmail_address(), 
+							advertisementBean.getContact_number(), advertisementBean.getPassword());
+					/*SEND EMAIL*/
+					String emailBody = Configurator.getConfig("EMAIL_ADVERTISEMENT_NOTIF")
+							.replaceAll("<id>", Long.toString(advertisementBean.getId()))
+							.replace("<password>", advertisementBean.getPassword());						
+					String subject   = Configurator.getConfig("MAIL_SUBJECT");
+					emailHelper.sendMail(new String[]{advertisementBean.getEmail_address()}, subject, emailBody);
+
+				}catch(Exception e){
+					e.printStackTrace();
 				}
 				
-
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+				
+			}else{
+				category 	= categoryHelper.fetchCategoryById(category_Id);
+				cateogoryName = category.getCategory();
+				
+				location	= locationHelper.fetchLocationById(location_id);
+				loationName = location.getLocation();
+				
+			}	
+		}else{					
+			allCategory = categoryHelper.fetchAllCategory();
+			allLocation = locationHelper.fetchAllLocation();
 			
-			
-		}else{
-			category 	= categoryHelper.fetchCategoryById(category_Id);
-			cateogoryName = category.getCategory();
-			
-			location	= locationHelper.fetchLocationById(location_id);
-			loationName = location.getLocation();
-			
-		}		
+		}
+		
+		userHelper.checkUser(request,response);
 		
 		request.setAttribute("errorMessage", errorMessage);
 		request.setAttribute("advertisementIterate", advertisementIterate);
@@ -311,8 +356,11 @@ public class AdvertisementServlet extends HttpServlet {
 		request.setAttribute("lstFileNameSize", lstFileName.size());
 		request.setAttribute("cateogoryName", cateogoryName);
 		request.setAttribute("loationName", loationName);
-				
-		
+		request.setAttribute("dashboardId", advertisementBean.getId());
+		request.setAttribute("allCategory", allCategory);
+		request.setAttribute("allLocation", allLocation);
+		request.setAttribute("conditionList", conditionList);
+								
 		request.getRequestDispatcher("/WEB-INF/jsp/advertisement.jsp").forward(request, response);
 //		request.getRequestDispatcher("/AdsConfirmationServlet").forward(request, response);
 //		doGet(request,response);

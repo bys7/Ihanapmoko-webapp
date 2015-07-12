@@ -8,6 +8,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/margin.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ihanap.css">
+
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootbox.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.timeago.js"></script>
+
 <script type='text/javascript'>	
 
 	$(document).ready(function(){ 
@@ -38,15 +46,12 @@
 		}
 		
 	}
+	
+	jQuery(document).ready(function() {
+	  	jQuery("abbr.timeago").timeago();
+	});
 
 </script>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/margin.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ihanap.css">
-
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootbox.min.js"></script>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -57,23 +62,7 @@
 	<div style="display:nont;"><fmt:formatDate var="currentDate" pattern="M-dd-yyyy" value="${currentDate}" /></div>
 	
 	<div class="ihanapMain">
-		<div class="header">
-        	<div class="width960">
-                <a href="HomeServlet"><span class="logo pullLeft"></span></a>
-                
-                <!---Login--->
-                    <button class="buttonOrange pullRight mtop20">Login/Signup</button>
-                    
-                    <!--<div class="pullRight mtop20">
-                    	<span class="pullLeft mright20 textWhite">Login as <a href="#" class="linkName">Name</a></span>
-                    	<button class="buttonRed pullRight">Logout</button>
-                        <span class="clear"></span>
-                    </div>
-                
-                <!----------->
-                <span class="clear"></span>
-            </div>
-        </div>
+		<%@ include file="/WEB-INF/jsp/header.jsp" %>
         
         <div class="body padtop40 padbot20">
         	<div class="width960">
@@ -83,9 +72,27 @@
 		        
 		        <div class="thumbnails mtop20">
 		        	<div class="search">
-		        		<form id="searchForm" method="post" action="SearchServlet">
-							Ano hanap mo? <input type="text" name="searchParameter" value="${searchParameter}">					
-							<button id="searchButton" class="buttonBlue">Search</button>									
+		        		<form id="searchForm" method="post" action="Search">
+							Ito ang mga naghahanap ng 
+								<input type="text" name="searchParameter" value="${searchParameter}">
+								Location								                			
+	                			<select name="location_id">
+	                				<option value="">  </option>
+									<c:forEach var="allLocation" items="${allLocation}">
+										<option value="${allLocation.id}" ${allLocation.id == selectedLocation ? 'selected' : ''}>${allLocation.location}</option>
+									</c:forEach>
+								</select>
+								Category
+								<select name="category_id">
+									<option value="">  </option>
+									<c:forEach var="allCategory" items="${allCategory}">
+										<option value="${allCategory.id}" ${allCategory.id == selectedCategory ? 'selected' : ''}>${allCategory.category}</option>
+									</c:forEach>
+								</select>				
+							<button id="searchButton" class="buttonBlue">Search</button>	<br/>
+							<c:if test="${not empty searchParameter}">
+								<c:out value="${lstFileNameSize}"/> result for "<c:out value="${searchParameter}"/>"
+							</c:if>								
 						</form> 
 		        	</div>
 		        	<div class="gallery">        	
@@ -93,34 +100,31 @@
 		        			<c:forEach items="${lstSearchResult}" var="searchBean" >
 		        				<c:set var="fileLoop" value="${fileLoop + 1}" />        				
 		        				<li>        					
-		        					<a href="DashboardServlet?${searchBean.advertisementId}" class="imgHolder">
-		        						<img id="imageSize_${fileLoop}" src="/Ihanapmoko-webapp/SearchImageServlet?imageName=${searchBean.picture_destination}"/>
-		        					</a>        					
-		       						<p class="mbot10 mtop10"><c:out value="${searchBean.advertisement}"/></p>
-		       						<div style="display:nont;"><fmt:formatDate var="dateCreated" pattern="M-dd-yyyy" value="${searchBean.date_created}" /></div>
-		       						
-		       						<p class="mbot10 mtop10"><span><c:out value="${searchBean.location}"/></span>|<c:out value="${currentDate - dateCreated}"/><span></span></p>        					
+		        					<a href="Dashboard?dashboardId=${searchBean.advertisementId}" class="imgHolder">
+		        						<img id="imageSize_${fileLoop}" src="/SearchImageServlet?imageName=${searchBean.picture_destination}"/>
+		        					       					
+		       							<p class="mbot10 mtop10"><b><c:out value="${searchBean.advertisement}"/></b></p>
+		       						</a> 
+		       						<p class="mbot10 mtop10"><span><c:out value="${searchBean.location}"/></span>
+		       						|<span><abbr class="timeago" title="<fmt:formatDate pattern="yyyy-MM-dd" value="${searchBean.date_created}"/>T<fmt:formatDate pattern="HH:mm:ss" value="${searchBean.date_created}"/>"></abbr></span></p>        					
 		        				</li>        				
 		        			</c:forEach>
 		        		</ul>
 		        	</div>
+		        	<c:out value="${searchPagination}" escapeXml="false" />
 		        </div>
-        	</div>        	
+        	</div>       
+        	<span class="clear"></span>
+       		
+	       	<div class="leaderboard">
+	        	<iframe src="https://storage.googleapis.com/support-kms-prod/SNP_501E7C3D5CA3CA07C641E6BAFB8A53C794CF_2922339_en_v2" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+	        </div> 	
         </div>
         
         
         
          <!-----Footer----->
-        <div class="footer">
-        	<div class="width960 cenText">
-
-                	<a href="#">About us</a>
-                    <a href="CommentsServlet">Contact Us</a>
-                    <a href="#">Disclaimer</a>
-                
-            </div>
-        
-        </div>
+        <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 	</div>
 
 </body>

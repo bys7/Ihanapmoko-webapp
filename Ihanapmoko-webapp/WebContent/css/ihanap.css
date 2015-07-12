@@ -47,7 +47,7 @@ body, html{
 }
 
 .logo{
-	background:url("../images/iHanapMoKo.png") no-repeat;
+	background:url("../images/ihanap B.3.1.png") no-repeat;
 	width:190px;
 	height:65px;
 	background-size:contain;
@@ -354,7 +354,6 @@ a.linkName{
 }
 .information{
 	border:1px solid #2D95B2;	
-	padding:10px 20px;
 	min-height: 372px;
 	width:60%;	
 	position:relative;
@@ -364,13 +363,18 @@ a.linkName{
   bottom: 20px;
   right: 20px;	
 }
+.information .edit{
+  position: absolute;
+  bottom: 20px;
+  right: 110px;
+}
 
 .bidBox ul{
 	list-style:none;
 	margin:0;
 	padding:0;
 	max-height:180px;
-	overflow:hidden;
+	/* overflow:hidden; */
 }
 .bidBox ul li{
 	border:1px solid #2D95B2;
@@ -640,7 +644,15 @@ button.close {
 
 .errorMessage{
 	hieght: padding-left:10px; 
-	color:#FF0F2C;
+	color:#fff;
+	background-color: #FF0F2C;
+  	padding: 5px 10px;
+}
+.sendMessage{
+	color: #fff;
+  	font-weight: bold;
+  	background-color: #006600;
+  	padding: 5px 10px;
 }
 
 /*********Validation*********/
@@ -648,4 +660,75 @@ button.close {
 .required:after{
 	content: " *";
 	color:#FF0F2C;	
+}
+
+.error{
+	border:1px solid red !important;
+}
+ul.pagination.custompagination li{
+ margin:10px 10px 0 0;
+ display:inline-block;
+}
+ul.pagination.custompagination li a.pageNumStyle {
+  background-color: #35ABCB;
+}
+ul.pagination.custompagination li a {
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+}
+ul.pagination.custompagination li a span {
+  background-color: #35ABCB;
+  opacity:1;
+}
+ul.pagination.custompagination li span {
+  background-color: #35ABCB;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+   opacity:0.5;
+}
+
+/**NEW**/
+.attachFile{
+	border: 1px solid #2D95B2;
+  font-size: 14px;
+  padding: 5px;
+  outline: 0;
+  cursor: pointer;
+	
+}
+div#displayDiv b {
+  width: 25%;
+  display: inline-block;
+}
+#displayDiv{
+	padding:10px 20px;	
+}
+.information h2{
+	display: block;
+  margin: 0;
+  background-color: #2D95B2;
+  color: white;
+  padding: 10px 20px;	
+}
+a.buttonRed{
+	  background: #D04934;
+	  outline: 0;
+	  border: 0;
+	  color: #FFF;
+	  text-decoration: none;
+	  padding: 5px 20px;
+	  font-size: 24px;
+	  -webkit-border-radius: 8px;
+	  -moz-border-radius: 8px;
+	  border-radius: 8px;
+	  cursor: pointer;
+	  transition: background-color 300ms ease-out;
+}
+a.buttonRed:hover{
+	background:#A21600;
 }

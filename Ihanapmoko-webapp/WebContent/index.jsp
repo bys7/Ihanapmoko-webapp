@@ -33,25 +33,9 @@
 </head>
 <body>
 
-	<div class="ihanapMain">	
-		<div class="header">
-        	<div class="width960">
-                <span class="logo pullLeft"></span>
-                
-                <!---Login--->
-                    <button class="buttonOrange pullRight mtop20">Login/Signup</button>
-                    
-                    <!--<div class="pullRight mtop20">
-                    	<span class="pullLeft mright20 textWhite">Login as <a href="#" class="linkName">Name</a></span>
-                    	<button class="buttonRed pullRight">Logout</button>
-                        <span class="clear"></span>
-                    </div>
-                
-                <!----------->
-                <span class="clear"></span>
-            </div>
-        </div>
-                     
+	<div class="ihanapMain">			
+        <%@ include file="/WEB-INF/jsp/header.jsp" %>
+               
        	<div class="body padtop40 padbot20">
        		<div class="width960">
        			<div class="leaderboard">
@@ -59,10 +43,10 @@
                 </div>
                 
                 <div class="mtop20 width65P pullLeft">
-                	<div class="search">
-                		 <form id="searchForm" method="post" action="SearchServlet">
+                	<!-- <div class="search">
+                		 <form id="searchForm" method="post" action="Search">
 
-							Ano hanap mo? <input type="text" name="searchParameter">
+							Magbebenta ako ng? <input type="text" name="searchParameter">
 							
 							<button id="searchButton" class="buttonBlue">Search</button>
 											
@@ -72,27 +56,57 @@
                 	<div class="hanapko">
                     	<h1 class="textHead">Hanap ko</h1>
                     	
-                        <a href="${pageContext.request.contextPath}/AdvertisementServlet" ><button class="buttonBlue" data-toggle="modal" data-target="#myModal">Post</button></a>
+                        <a href="${pageContext.request.contextPath}/Advertisement" ><button class="buttonBlue" data-toggle="modal" data-target="#myModal">Post</button></a>
+                    </div>-->
+                    <div class="hanapko">
+                    	<h1 class="textHead">
+                    		<a href="${pageContext.request.contextPath}/Advertisement" >
+                    			(+) Ihanap mo ko ng
+                    		</a>
+                    		  
+                    	</h1>                    	
                     </div>
+                    <form id="searchForm" method="post" action="Search">
+	                    <div class="hanapko">
+	                    	<h1 class="textHead">
+	                    		Ito ang mga naghahanap ng                   	
+	                    		<input type="text" name="searchParameter">							
+								<button id="searchButton" class="buttonBlue">Search</button>
+	                    	</h1>
+	                    	
+	                    </div>
+                    </form>
+                    	
+                    <span class="clear"></span>
+                    <br/><br/>
+	                <p>IhanapMoKo.com is a spin-off of the well-known buy-and-sell website. 
+	                Buy and sell website posts are made for sellers who would want to vend items, 
+	                may it be secondhand or brand new. From these posts, 
+	                buyers who are eager to either buy or bargain with the sellers find items they are looking for. 
+	                However, things turn the opposite way in IhanapMoKo.com. 
+	                The said website focuses mainly on "looking for" users/posts. 
+	                The posts in IhanapMoKo.com are not item-entitled but rather user-entitled. 
+	                The sellers then are the ones to come upon the buyers who are willing to purchase the items they are about to sell.
+	                Moreover, these buyers get the chance to declare their desired amount on their posts. 
+	                From this, multiple sellers can "bid" on a user, and this user is to choose what he/she considers a wiser purchase.</p>  
                 </div>
+                
                 
                 <div class="skyscraper pullRight mtop20">
                 	<iframe src="https://lh4.ggpht.com/ike-jviZQ32RHuhkwLcAt_9vdpBX1oWKU00NX7QRe5GPl7-5sapzZ0u91_ssg_-Ednak2Hj-Hg=w162" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
                 
-                </div> 
+                </div>        
+                      
        		</div>
+       		<span class="clear"></span>
+       		
+	       	<div class="leaderboard">
+	        	<iframe src="https://storage.googleapis.com/support-kms-prod/SNP_501E7C3D5CA3CA07C641E6BAFB8A53C794CF_2922339_en_v2" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+	        </div>
        	</div>
         
-        <div class="footer">
-        	<div class="width960 cenText">
-
-                	<a href="#">About us</a>
-                    <a href="CommentsServlet">Contact Us</a>
-                    <a href="#">Disclaimer</a>
-                
-            </div>
         
-        </div>
+        <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 	
 	</div>
 
